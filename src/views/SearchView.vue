@@ -18,7 +18,7 @@
         </div>
       </section>
 
-      <section class="list-group p-1 m-1">
+      <section class="list-group py-2 px-4 m-1 scroll-y">
         <SearchResultItem
           v-for="(item, index) in searchResults"
           :key="index"
@@ -89,5 +89,10 @@ export default {
 
 .vh-100 {
   height: 100vh;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>
