@@ -12,16 +12,24 @@
         <div class="hero-body">
           <p class="title">Search Guests</p>
           <p class="subtitle">Enter guest name</p>
-          <form @submit.prevent="e => console.log(searchText)" class="form p-4">
+          <form @submit.prevent="handleSearch" class="form p-4">
             <SearchBar v-model="searchText" />
           </form>
         </div>
       </section>
 
-      <section>
-        <div class="content">
-          <p>Output will be shown ghere</p>
-        </div>
+      <section class="list-group p-1 m-1">
+        <SearchResultItem
+          v-for="(item, index) in searchResults"
+          :key="index"
+          :name="item.name"
+          :email="item.email"
+          :mobile-number="item.mobile_number"
+          :affiliation="item.affiliation"
+          :is-registered="item.is_registered"
+          :id="item._id"
+          :selected="false"
+        />
       </section>
     </div>
   </div>
@@ -30,13 +38,20 @@
 <script>
 import SearchBar from '@/components/SearchBar.vue';
 import eventDesktopImage from '@/assets/images/event-desktop-image.jpg';
+import SearchResultItem from '@/components/SearchResultItem.vue';
+import axios from 'axios';
 
 export default {
   name: 'SearchView',
-  components: { SearchBar },
+  components: { SearchResultItem, SearchBar },
   setup() {
     return {
       eventDesktopImage
+    };
+  },
+  data() {
+    return {
+      searchResults: []
     };
   },
   computed: {
@@ -47,6 +62,20 @@ export default {
       set(value) {
         this.$store.commit({ type: 'setSearchText', value });
       }
+    }
+  },
+  methods: {
+    handleSearch() {
+      let searchUrl = new URL('http://127.0.0.1:5000/api/guest/search');
+      searchUrl.search = new URLSearchParams({
+        searchtext: this.searchText
+      });
+      axios
+        .get(searchUrl.toString())
+        .then(res => {
+          this.searchResults = res.data.data;
+        })
+        .catch(e => console.error(e));
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="field is-grouped is-fullwidth">
     <p class="control has-icons-right">
       <input
         class="input"
@@ -10,15 +10,28 @@
       />
       <SearchIcon />
     </p>
+    <FormButton
+      type="submit"
+      button-classes="is-dark"
+      :disabled="isSearchDisabled"
+    >
+      Search</FormButton
+    >
   </div>
 </template>
 <script>
 import SearchIcon from '@/components/SearchIcon.vue';
+import FormButton from '@/components/form/FormButton.vue';
 
 export default {
   props: ['modelValue'],
   name: 'SearchBar',
-  components: { SearchIcon }
+  components: { FormButton, SearchIcon },
+  computed: {
+    isSearchDisabled() {
+      return this.$store.state.searchText.length === 0;
+    }
+  }
 };
 </script>
 
