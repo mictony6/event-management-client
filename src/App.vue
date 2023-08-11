@@ -1,5 +1,5 @@
 <template>
-  <TheNavBar class="is-fixed-top" style="background: transparent" />
+  <TheNavBar />
 
   <RouterView />
 </template>

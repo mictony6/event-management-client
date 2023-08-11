@@ -56,6 +56,9 @@ import axios from 'axios';
 export default {
   name: 'RegistrationForm',
   components: { TextField, FormButton },
+  mounted() {
+    this.$store.dispatch('resetState');
+  },
   methods: {
     handleSubmit() {
       const url = 'http://127.0.0.1:5000/api/guest/create';
@@ -126,7 +129,12 @@ export default {
     },
 
     canSubmit() {
-      return this.isEmailValid && this.isNumberValid;
+      return (
+        this.name.length &&
+        this.affiliation.length &&
+        this.isEmailValid &&
+        this.isNumberValid
+      );
     }
   }
 };

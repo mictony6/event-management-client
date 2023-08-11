@@ -6,8 +6,8 @@ export default createStore({
     email: '',
     mobileNumber: '',
     affiliation: '',
-    isEmailValid: false,
-    isNumberValid: false,
+    isEmailValid: true,
+    isNumberValid: true,
     searchText: ''
   },
   getters: {},
@@ -34,6 +34,38 @@ export default createStore({
       state.searchText = payload.value;
     }
   },
-  actions: {},
+  actions: {
+    resetState({ commit }) {
+      commit({
+        type: 'setIsEmailValid',
+        value: true
+      });
+
+      commit({
+        type: 'setIsNumberValid',
+        value: true
+      });
+
+      commit({
+        type: 'setName',
+        value: ''
+      });
+
+      commit({
+        type: 'setEmail',
+        value: ''
+      });
+
+      commit({
+        type: 'setMobileNumber',
+        value: ''
+      });
+
+      commit({
+        type: 'setAffiliation',
+        value: ''
+      });
+    }
+  },
   modules: {}
 });

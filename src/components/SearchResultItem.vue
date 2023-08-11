@@ -29,7 +29,11 @@
           <div class="label">Email:</div>
           <div class="control">
             <input
-              class="input"
+              @input="verifyEmail"
+              :class="[
+                'input',
+                { 'is-danger': !this.$store.state.isEmailValid }
+              ]"
               type="text"
               :readonly="isReadOnly"
               v-model="emailField"
@@ -41,7 +45,11 @@
           <div class="label">Mobile Number:</div>
           <div class="control">
             <input
-              class="input"
+              @input="verifyMobileNumber"
+              :class="[
+                'input',
+                { 'is-danger': !this.$store.state.isNumberValid }
+              ]"
               type="text"
               :readonly="isReadOnly"
               v-model="numField"
@@ -75,6 +83,7 @@
             v-show="!isReadOnly"
             @click.prevent="updateGuest"
             class="button is-info"
+            :disabled="!canSubmit"
           >
             Save
           </button>
@@ -104,6 +113,7 @@ export default {
     'selected'
   ],
   mounted() {
+    this.$store.dispatch('resetState');
     this.nameField = this.name;
     this.emailField = this.email;
     this.numField = this.mobileNumber;
@@ -121,6 +131,16 @@ export default {
       affiliationField: '',
       isRegisteredField: false
     };
+  },
+  computed: {
+    canSubmit() {
+      return (
+        this.nameField.length &&
+        this.affiliationField.length &&
+        this.$store.state.isEmailValid &&
+        this.$store.state.isNumberValid
+      );
+    }
   },
   methods: {
     toggleModal() {
@@ -147,6 +167,20 @@ export default {
         .patch(url, data, config)
         .then(res => console.log(res))
         .catch(e => console.error(e));
+    },
+    verifyEmail(e) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      this.$store.commit({
+        type: 'setIsEmailValid',
+        value: emailRegex.test(e.target.value)
+      });
+    },
+    verifyMobileNumber(e) {
+      const mobileNumberRegex = /^\d{11}$/;
+      this.$store.commit({
+        type: 'setIsNumberValid',
+        value: mobileNumberRegex.test(e.target.value)
+      });
     }
   }
 };

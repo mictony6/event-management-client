@@ -41,18 +41,10 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  .firstColumn {
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-  }
+
   .secondColumn {
     background: rgba(0, 0, 0, 0.5);
     min-width: 90%;
-  }
-
-  #eventImage {
-    padding: 0 !important;
   }
 }
 </style>
