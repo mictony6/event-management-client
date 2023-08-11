@@ -154,9 +154,10 @@ export default {
 
 <style scoped>
 .item {
-  border: solid white 1px;
+  border: solid white 2px;
+  border-bottom-color: #e7e7e7;
 }
 .item:hover {
-  border: solid 1px grey;
+  border: solid 2px #a0a0ff;
 }
 </style>
