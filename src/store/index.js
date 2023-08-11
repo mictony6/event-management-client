@@ -7,7 +7,8 @@ export default createStore({
     mobileNumber: '',
     affiliation: '',
     isEmailValid: false,
-    isNumberValid: false
+    isNumberValid: false,
+    searchText: ''
   },
   getters: {},
   mutations: {
@@ -28,6 +29,9 @@ export default createStore({
     },
     setIsNumberValid(state, payload) {
       state.isNumberValid = payload.value;
+    },
+    setSearchText(state, payload) {
+      state.searchText = payload.value;
     }
   },
   actions: {},
