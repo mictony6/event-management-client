@@ -4,12 +4,12 @@ import SearchView from '@/views/SearchView.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/register/:event/:terminal',
     name: 'register',
     component: RegistrationView
   },
   {
-    path: '/search',
+    path: '/search/:event/:terminal',
     name: 'search',
     component: SearchView
   }

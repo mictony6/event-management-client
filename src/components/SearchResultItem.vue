@@ -87,7 +87,9 @@
           >
             Save
           </button>
-          <button class="button is-success">Assign to Event</button>
+          <button @click.prevent="assignEventToGuest" class="button is-success">
+            Assign to Event
+          </button>
         </div>
       </div>
     </div>
@@ -181,6 +183,21 @@ export default {
         type: 'setIsNumberValid',
         value: mobileNumberRegex.test(e.target.value)
       });
+    },
+    assignEventToGuest() {
+      let url = new URL('http://127.0.0.1:5000/api/guest/register');
+      const data = {
+        guest_id: this.id,
+        terminal: this.$route.params.terminal,
+        event_id: 0
+      };
+      const config = {
+        headers: { 'content-type': 'application/x-www-form-urlencoded' }
+      };
+      axios
+        .patch(url, data, config)
+        .then(res => console.log(res))
+        .catch(e => console.error(e));
     }
   }
 };
