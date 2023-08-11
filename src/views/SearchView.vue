@@ -1,10 +1,6 @@
 <template>
   <div class="columns is-desktop is-flex-tablet is-gapless vh-100">
-    <div class="column is-two-fifths firstColumn" id="background-image ">
-      <figure class="image">
-        <img :src="eventDesktopImage" alt="event image" id="eventImage" />
-      </figure>
-    </div>
+    <EventBackgroundImage :event-desktop-image="eventDesktopImage" />
     <div
       class="column secondColumn is-flex is-flex-direction-column is-justify-content-flex-start is-flex-wrap"
     >
@@ -20,15 +16,15 @@
 
       <section class="list-group py-2 px-4 m-1 scroll-y">
         <SearchResultItem
-          v-for="(item, index) in searchResults"
-          :key="index"
+          v-for="item in searchResults"
+          :key="item._id"
           :name="item.name"
           :email="item.email"
           :mobile-number="item.mobile_number"
           :affiliation="item.affiliation"
           :is-registered="item.is_registered"
           :id="item._id"
-          :selected="false"
+          :selected="!(this.searchResults.length > 1)"
         />
       </section>
     </div>
@@ -40,10 +36,11 @@ import SearchBar from '@/components/SearchBar.vue';
 import eventDesktopImage from '@/assets/images/event-desktop-image.jpg';
 import SearchResultItem from '@/components/SearchResultItem.vue';
 import axios from 'axios';
+import EventBackgroundImage from '@/components/EventBackgroundImage.vue';
 
 export default {
   name: 'SearchView',
-  components: { SearchResultItem, SearchBar },
+  components: { EventBackgroundImage, SearchResultItem, SearchBar },
   setup() {
     return {
       eventDesktopImage

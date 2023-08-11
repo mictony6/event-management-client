@@ -1,10 +1,6 @@
 <template>
   <div class="columns is-desktop is-flex-tablet is-gapless vh-100">
-    <div class="column is-two-fifths firstColumn" id="background-image ">
-      <figure class="image">
-        <img :src="eventDesktopImage" alt="event image" id="eventImage" />
-      </figure>
-    </div>
+    <EventBackgroundImage :event-desktop-image="eventDesktopImage" />
     <div class="column secondColumn is-flex is-align-items-center">
       <RegistrationForm />
     </div>
@@ -15,10 +11,11 @@
 import eventDesktopImage from '@/assets/images/event-desktop-image.jpg';
 import eventMobileImage from '@/assets/images/event-mobile-image.jpg';
 import RegistrationForm from '@/components/RegistrationForm.vue';
+import EventBackgroundImage from '@/components/EventBackgroundImage.vue';
 
 export default {
   name: 'RegistrationView',
-  components: { RegistrationForm },
+  components: { EventBackgroundImage, RegistrationForm },
   setup() {
     return {
       eventDesktopImage,
