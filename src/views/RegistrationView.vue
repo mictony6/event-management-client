@@ -17,10 +17,6 @@ export default {
   name: 'RegistrationView',
   components: { EventBackgroundImage, RegistrationForm },
   setup() {
-    // let url = new URL('http://localhost:5000/api/events/search');
-    //
-    // let eventName;
-    // let eventId;
     return {
       eventDesktopImage,
       eventMobileImage
