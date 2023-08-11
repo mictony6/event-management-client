@@ -2,12 +2,7 @@
   <div class="columns is-desktop is-flex-tablet is-gapless vh-100">
     <div class="column is-two-fifths firstColumn" id="background-image ">
       <figure class="image">
-        <img
-          class="p-4"
-          :src="eventDesktopImage"
-          alt="event image"
-          id="eventImage"
-        />
+        <img :src="eventDesktopImage" alt="event image" id="eventImage" />
       </figure>
     </div>
     <div class="column secondColumn is-flex is-align-items-center">

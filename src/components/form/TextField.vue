@@ -5,8 +5,9 @@
       <input
         :id="inputId"
         type="text"
-        class="input"
+        :class="['input', { 'is-danger': !validity }]"
         :value="modelValue"
+        :placeholder="placeholder"
         @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
@@ -15,7 +16,16 @@
 <script>
 export default {
   name: 'TextField',
-  props: ['label', 'inputId', 'modelValue']
+  props: {
+    label: String,
+    placeholder: String,
+    inputId: String,
+    modelValue: String,
+    validity: {
+      type: Boolean,
+      default: true
+    }
+  }
 };
 </script>
 
