@@ -130,6 +130,7 @@ export default {
     this.affiliationField = this.affiliation;
     this.isRegisteredField = this.isRegistered;
     this.isExpanded = this.selected;
+    this.isAssigned = this.isRegistered;
   },
   data() {
     return {
