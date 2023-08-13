@@ -87,8 +87,16 @@
           >
             Save
           </button>
-          <button @click.prevent="assignEventToGuest" class="button is-success">
+          <button
+            v-show="!isAssigned"
+            @click.prevent="assignEventToGuest"
+            class="button is-warning"
+          >
             Assign to Event
+          </button>
+
+          <button v-show="isAssigned" disabled class="button is-success">
+            Assigned Successfully
           </button>
         </div>
       </div>
@@ -131,7 +139,8 @@ export default {
       emailField: '',
       numField: '',
       affiliationField: '',
-      isRegisteredField: false
+      isRegisteredField: false,
+      isAssigned: false
     };
   },
   computed: {
@@ -152,6 +161,7 @@ export default {
     toggleReadonly() {
       this.isReadOnly = !this.isReadOnly;
     },
+
     updateGuest() {
       this.toggleReadonly();
       const url = 'http://127.0.0.1:5000/api/guest/update';
@@ -188,15 +198,17 @@ export default {
       let url = new URL('http://127.0.0.1:5000/api/guest/register');
       const data = {
         guest_id: this.id,
-        terminal: this.$route.params.terminal,
-        event_id: 0
+        terminal: this.$route.params.terminal ? this.$route.params.terminal : 0,
+        event_id: this.$store.state.eventId
       };
       const config = {
         headers: { 'content-type': 'application/x-www-form-urlencoded' }
       };
       axios
-        .patch(url, data, config)
-        .then(res => console.log(res))
+        .post(url, data, config)
+        .then(() => {
+          this.isAssigned = true;
+        })
         .catch(e => console.error(e));
     }
   }

@@ -8,7 +8,11 @@ export default createStore({
     affiliation: '',
     isEmailValid: true,
     isNumberValid: true,
-    searchText: ''
+    searchText: '',
+    eventName: '',
+    eventId: '',
+    imageUrlDesktop: '',
+    imageUrlMobile: ''
   },
   getters: {},
   mutations: {
@@ -32,6 +36,13 @@ export default createStore({
     },
     setSearchText(state, payload) {
       state.searchText = payload.value;
+    },
+
+    setEventDetails(state, payload) {
+      state.eventName = payload.eventName;
+      state.eventId = payload.eventId;
+      state.imageUrlDesktop = payload.imageUrlDesktop;
+      state.imageUrlMobile = payload.imageUrlMobile;
     }
   },
   actions: {

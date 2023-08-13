@@ -4,7 +4,7 @@
     class="form is-flex-grow-1 mx-6 p-4 is-rounded"
   >
     <div class="content">
-      <div class="title is-4">Event Name</div>
+      <div class="title is-4">{{ eventName }}</div>
       <div class="subtitle is-6">Register guest to system</div>
       <p><small>Please fill out all the fields.</small></p>
     </div>
@@ -46,6 +46,17 @@
       <FormButton type="reset" button-classes="is-light">Reset</FormButton>
     </div>
   </form>
+  <div :class="['modal', { 'is-active': showModalSuccess }]">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="modal-card-body">Successfully Registered</div>
+    </div>
+    <button
+      @click="toggleModalSuccess"
+      class="modal-close is-large"
+      aria-label="close"
+    ></button>
+  </div>
 </template>
 <script>
 import FormButton from '@/components/form/FormButton.vue';
@@ -56,10 +67,18 @@ import axios from 'axios';
 export default {
   name: 'RegistrationForm',
   components: { TextField, FormButton },
+  data() {
+    return {
+      showModalSuccess: false
+    };
+  },
   mounted() {
     this.$store.dispatch('resetState');
   },
   methods: {
+    toggleModalSuccess() {
+      this.showModalSuccess = !this.showModalSuccess;
+    },
     handleSubmit() {
       const url = 'http://127.0.0.1:5000/api/guest/create';
       const data = {
@@ -73,9 +92,12 @@ export default {
       };
       axios
         .post(url, data, config)
-        .then(res => console.log(res))
+        .then(() => {
+          this.toggleModalSuccess();
+        })
         .catch(e => console.error(e));
     },
+
     verifyEmail(e) {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       this.$store.commit({
@@ -92,7 +114,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isEmailValid', 'isNumberValid']),
+    ...mapState(['isEmailValid', 'isNumberValid', 'eventName']),
     name: {
       get() {
         return this.$store.state.name;
