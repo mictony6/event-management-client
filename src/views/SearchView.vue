@@ -1,6 +1,8 @@
 <template>
   <div class="columns is-desktop is-flex-tablet is-gapless vh-100">
-    <EventBackgroundImage :event-desktop-image="eventDesktopImage" />
+    <EventBackgroundImage
+      :event-desktop-image="this.$store.state.imageUrlDesktop"
+    />
     <div
       class="column secondColumn is-flex is-flex-direction-column is-justify-content-flex-start is-flex-wrap"
     >
@@ -33,7 +35,6 @@
 
 <script>
 import SearchBar from '@/components/SearchBar.vue';
-import eventDesktopImage from '@/assets/images/event-desktop-image.jpg';
 import SearchResultItem from '@/components/SearchResultItem.vue';
 import axios from 'axios';
 import EventBackgroundImage from '@/components/EventBackgroundImage.vue';
@@ -41,11 +42,7 @@ import EventBackgroundImage from '@/components/EventBackgroundImage.vue';
 export default {
   name: 'SearchView',
   components: { EventBackgroundImage, SearchResultItem, SearchBar },
-  setup() {
-    return {
-      eventDesktopImage
-    };
-  },
+
   data() {
     return {
       searchResults: []

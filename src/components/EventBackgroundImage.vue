@@ -9,7 +9,8 @@
 export default {
   name: 'EventBackgroundImage',
   props: {
-    eventDesktopImage: {}
+    eventDesktopImage: {},
+    eventMobileImage: {}
   }
 };
 </script>
