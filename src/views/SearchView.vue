@@ -62,7 +62,8 @@ export default {
     handleSearch() {
       let searchUrl = new URL('http://127.0.0.1:5000/api/guest/search');
       searchUrl.search = new URLSearchParams({
-        searchtext: this.searchText
+        searchtext: this.searchText,
+        event_id: this.$store.state.eventId
       });
       axios
         .get(searchUrl.toString())
