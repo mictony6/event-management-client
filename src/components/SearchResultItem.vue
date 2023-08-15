@@ -165,7 +165,7 @@ export default {
 
     updateGuest() {
       this.toggleReadonly();
-      const url = 'http://127.0.0.1:5000/api/guest/update';
+      const url = 'http://eventsapi.ihdevs.com/api/guest/update';
       const data = {
         name: this.nameField,
         email: this.emailField,
@@ -196,7 +196,7 @@ export default {
       });
     },
     assignEventToGuest() {
-      let url = new URL('http://127.0.0.1:5000/api/guest/register');
+      let url = new URL('https://eventsapi.ihdevs.com/api/guest/register');
       const data = {
         guest_id: this.id,
         terminal: this.$route.params.terminal ? this.$route.params.terminal : 0,

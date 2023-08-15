@@ -80,7 +80,7 @@ export default {
       this.showModalSuccess = !this.showModalSuccess;
     },
     handleSubmit() {
-      const url = 'http://127.0.0.1:5000/api/guest/create';
+      const url = 'http://eventsapi.ihdevs.com/api/guest/create';
       const data = {
         name: this.name,
         email: this.email,

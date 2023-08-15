@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     handleSearch() {
-      let searchUrl = new URL('http://127.0.0.1:5000/api/guest/search');
+      let searchUrl = new URL('http://eventsapi.ihdevs.com/api/guest/search');
       searchUrl.search = new URLSearchParams({
         searchtext: this.searchText,
         event_id: this.$store.state.eventId

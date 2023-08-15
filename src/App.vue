@@ -14,7 +14,7 @@ export default {
     RouterView
   },
   async mounted() {
-    let url = new URL('http://localhost:5000/api/event/search');
+    let url = new URL('http://eventsapi.ihdevs.com/api/event/search');
     url.search = new URLSearchParams({
       event_name: 'testEvent'
     });
